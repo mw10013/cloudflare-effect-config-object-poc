@@ -62,7 +62,7 @@
 			"kv_namespaces": [
 				{
 					"binding": "KV",
-					"id": "" // config-object-poc-kv-production
+					"id": "afc2dda30fd1438280a8693b7d467709" // cloudflare-effect-config-object-poc-kv-production
 				}
 			]
 		}

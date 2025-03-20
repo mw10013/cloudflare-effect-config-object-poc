@@ -2,7 +2,7 @@
 
 Traditionally, environment variables are string based. Modern runtimes such as Cloudflare's also put objects into the environment. Cloudflare calls these [bindings](https://developers.cloudflare.com/workers/runtime-apis/bindings/). They allow a Worker, Cloudflare's serverless function, to interact with resources on Cloudflare such as D1 (sqlite), R2 (object storage), and DO (durable objects). ConfigProviders hew to tradition and support only string-based configuration so they cannot fully support Cloudflare envs.
 
-In Effect, a service can be 'fully declarative' — meaning it avoids runtime boilerplate — if its layer constructors don’t need arguments from the application. This is a desirable property, as it simplifies layer construction. Config supports this declarativity when limited to string-based configuration. However, a Cloudflare service, which depends on object bindings in the environment, can’t leverage Config to achieve this property.
+In Effect, a service can be 'declarative' — meaning it avoids runtime boilerplate — if its layer constructors don’t need arguments from the application. This is a desirable property, as it simplifies layer construction. Config supports this declarativity when limited to string-based configuration. However, a Cloudflare service, which depends on object bindings in the environment, can’t leverage Config to achieve this property.
 
 I propose adding `object` support to Config for full Cloudflare env integration and to unlock declarative Cloudflare services.
 
@@ -16,7 +16,7 @@ Config.object: (name: string) => Config<object>
 
 ### Proof of Concept (POC)
 
-The POC uses pathological type assertions to mock the proposed API, demonstrating that the existing machinery in Effect can support this. It is in this [repo]() and its essence:
+The POC uses pathological type assertions to mock the proposed API, demonstrating that the existing machinery in Effect can support this. It is in this [repo](https://github.com/mw10013/cloudflare-effect-config-object-poc) and its essence:
 
 ```ts
 // ConfigEx.ts
@@ -42,7 +42,7 @@ export const object = (name: string) =>
 	)
 ```
 
-Here is a declarative Cloudflare service with a dependency on another declarative Cloudflare service:
+Declarative Cloudflare service with a dependency on another declarative Cloudflare service:
 
 ```ts
 // Poll.ts
@@ -57,8 +57,8 @@ export class Poll extends Effect.Service<Poll>()('Poll', {
 					: Either.left(ConfigError.InvalidData([], `Expected a DurableObjectNamespace but received ${object}`))
 			)
 		)
-   // Snip
-    return {
+		// Snip
+		return {
 			// Snip
 		}
 	})
