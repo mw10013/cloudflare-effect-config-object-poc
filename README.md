@@ -18,7 +18,7 @@ Proof-of-Concept (POC) for `object` support in Effect's Config. See [Ask](./Ask.
 - Workers & Pages Settings: cloudflare-effect-config-object-poc
   - Git repository: connect to git repo
   - Build configuration
-    - Build command: CLOUDFLARE_ENV=production build
+    - Build command: CLOUDFLARE_ENV=production pnpm build
     - Deploy command: pnpm wrangler deploy
 
 
