@@ -172,11 +172,11 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 									<path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" />
 								</svg>
 							</div>
-							<ul tabIndex={0} class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+							<ul tabIndex={0} class="dropdown-content menu z-1 mt-3 w-52 menu-sm rounded-box bg-base-100 p-2 shadow">
 								<ListItems />
 							</ul>
 						</div>
-						<a href="/" className="btn btn-ghost text-xl">
+						<a href="/" className="btn text-xl btn-ghost">
 							Config Object POC
 						</a>
 					</div>
@@ -195,7 +195,7 @@ const Layout: FC<PropsWithChildren<{}>> = ({ children }) => {
 
 const Home: FC<{ loaderData: Effect.Effect.Success<ReturnType<typeof homeLoaderData>> }> = ({ loaderData }) => (
 	<div className="mt-2 flex flex-col items-center gap-2">
-		<div className="card bg-base-100 w-96 shadow-sm">
+		<div className="card w-96 bg-base-100 shadow-sm">
 			<div className="card-body">
 				<h2 className="card-title">Config Poll</h2>
 				<div className="stats shadow">
@@ -212,6 +212,11 @@ const Home: FC<{ loaderData: Effect.Effect.Success<ReturnType<typeof homeLoaderD
 						<div className="stat-desc">Allow objects in Config.</div>
 					</div>
 				</div>
+				<div className="card-actions justify-end">
+					<a href="/vote" className="btn btn-primary">
+						Vote
+					</a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -221,7 +226,7 @@ const homeLoaderData = () => Poll.getTally()
 
 const Vote: FC<{ actionData?: { voterId: string; vote: string } }> = ({ actionData }) => (
 	<div className="mt-2 flex flex-col items-center gap-2">
-		<div className="card bg-base-100 w-96 shadow-sm">
+		<div className="card w-96 bg-base-100 shadow-sm">
 			<form action="/vote" method="post">
 				<div className="card-body">
 					<h2 className="card-title text-center">Vote</h2>
